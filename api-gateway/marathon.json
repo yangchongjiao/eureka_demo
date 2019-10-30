@@ -1,0 +1,48 @@
+{
+	"id":"gateway",
+	"instances": 1,
+	"container": {
+		"type": "DOCKER",
+		"docker": {
+			"image":"registry:5000/gateway",
+			"network": "BRIDGE",
+			"portMappings": [
+				{
+				"containerPort": 8080,
+				"hostPort": 0,
+				"servicePort": 0,
+				"protocol": "tcp"
+				}
+			],
+			"parameters": [
+			],
+			"privileged": false,
+			"forcePullImage": true
+		},
+		"volumes": [{
+			"containerPath": "/etc/hosts",
+			"hostPath": "/etc/hosts",
+			"mode": "RO"
+		}]
+	},
+	"healthChecks":[
+		{
+		"path": "/admin/health",
+	        "protocol": "HTTP",
+	        "portIndex": 0,
+	        "gracePeriodSeconds": 300,
+	        "intervalSeconds": 60,
+	        "timeoutSeconds": 20,
+	        "maxConsecutiveFailures": 3,
+	        "ignoreHttp1xx": false
+	    }
+	],
+	"labels": {
+	    "HAPROXY_0_VHOST":"api.study.com",
+	    "HAPROXY_GROUP": "external"
+	},
+	"backoffSeconds": 1,
+	"backoffFactor": 1.15,
+	"cpus": 0.25,
+	"mem": 768
+}
