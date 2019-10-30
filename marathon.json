@@ -1,0 +1,50 @@
+{
+  "id": "eureka",
+  "instances": 1,
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "registry:5000/eureka",
+      "network": "BRIDGE",
+      "portMappings": [
+        {
+          "containerPort": 8761,
+          "hostPort": 0,
+          "servicePort": 0,
+          "protocol": "tcp"
+        }
+      ],
+      "parameters": [
+      ],
+      "privileged": false,
+      "forcePullImage": true
+    },
+    "volumes": [
+      {
+        "containerPath": "/etc/hosts",
+        "hostPath": "/etc/hosts",
+        "mode": "RO"
+      }
+    ]
+  },
+  "healthChecks": [
+    {
+      "path": "/",
+      "protocol": "HTTP",
+      "portIndex": 0,
+      "gracePeriodSeconds": 300,
+      "intervalSeconds": 60,
+      "timeoutSeconds": 20,
+      "maxConsecutiveFailures": 3,
+      "ignoreHttp1xx": false
+    }
+  ],
+  "labels": {
+    "HAPROXY_0_VHOST": "sutong.eureka.com",
+    "HAPROXY_GROUP": "external"
+  },
+  "backoffSeconds": 1,
+  "backoffFactor": 1.15,
+  "cpus": 0.25,
+  "mem": 768
+}
