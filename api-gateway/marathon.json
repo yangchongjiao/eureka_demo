@@ -8,7 +8,7 @@
 			"network": "BRIDGE",
 			"portMappings": [
 				{
-				"containerPort": 8080,
+				"containerPort": 8280,
 				"hostPort": 0,
 				"servicePort": 0,
 				"protocol": "tcp"
@@ -44,5 +44,5 @@
 	"backoffSeconds": 1,
 	"backoffFactor": 1.15,
 	"cpus": 0.25,
-	"mem": 768
+	"mem": 200
 }

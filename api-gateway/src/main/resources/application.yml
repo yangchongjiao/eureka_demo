@@ -1,10 +1,10 @@
 server:
-  port: 8080
-#指定注册中心地址
+  port: 8280
+#鎸囧畾娉ㄥ唽涓績鍦板潃
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://192.168.88.102:10000/eureka/
+      defaultZone: http://192.168.93.130:10002/eureka/
   instance:
     instance-id: ${spring.cloud.client.ip-address}:${server.port}
     prefer-ip-address: true
@@ -22,5 +22,5 @@ zuul:
       stripPrefix: false
     product-service: /apigateway/product/**
   ignored-patterns: /*-service/**
-    #处理http请求头为空的问题
+    #澶勭悊http璇锋眰澶翠负绌虹殑闂
   sensitive-headers:
